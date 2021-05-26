@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-content>
+      <div class="header">
+        <P>Verification</P>
+      </div>
+      <form (ngSubmit)="verify($event)" name="verifyForm" [formGroup]="verifyForm">
+        <div class="emailInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Code word</mat-label>
+            <input             
+              matInput
+              placeholder="Enter code word" required
+              formControlName="email"            
+            />
+            <mat-error *ngIf="!verifyForm.controls['email'].valid">
+                Email is required
+              </mat-error>
+          </mat-form-field>
+        </div>       
+        <button mat-flat-button color="primary">Verify Account</button>
+      </form>      
+    </mat-card-content>
+  </mat-card>
+
