@@ -29,13 +29,14 @@ export class VerificationComponent implements OnInit {
     this.userService.findUserById(this.id).subscribe (      
       (user) => {
         if (this.mode === "install"){
-        user.code = event.target[0].value
-        this.route.navigate(['/home'])
-        localStorage.setItem("key", user.name) }
+          user.code = event.target[0].value
+          this.route.navigate(['/home'])
+          localStorage.setItem("key", user.name) }
         if (this.mode === "confirmation") {          
           if (user.code === event.target[0].value) {
-          this.route.navigate(['/home'])
-          localStorage.setItem("key", user.name)  } else {
+            this.route.navigate(['/home'])
+            localStorage.setItem("key", user.name)  } 
+          else {
             this.dialog.open(DialogForVerification)
           }
        }
