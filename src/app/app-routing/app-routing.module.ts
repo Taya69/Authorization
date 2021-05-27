@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { RouterModule, Routes, Router} from '@angular/router';
 import {AuthorizationComponent} from '../authorization/authorization.component';
 import {AppComponent} from '../app.component'
 import {HomeComponent} from '../home/home.component'
 import { RegistrationComponent} from '../registration/registration.component'
 import { VerificationComponent} from '../verification/verification.component'
 import { RestoreOfPasswordComponent} from '../restore-of-password/restore-of-password.component'
-import { filter, find} from 'rxjs/operators'
 import { AuthGuard } from '../auth.guard';
+import { AdminPageComponent } from '../home/admin-page/admin-page.component';
 
 const routes: Routes = [  
   {
@@ -38,8 +38,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        component: AuthorizationComponent
+        path: 'admin',
+        component: AdminPageComponent
       }
     ]
   }
@@ -51,8 +51,7 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
   constructor (public router : Router) {      
-    // router.events.pipe(find(e => e instanceof NavigationEnd)).subscribe((e) => { 
-           
+    // router.events.pipe(find(e => e instanceof NavigationEnd)).subscribe((e) => {            
     //   console.log(e) 
     // })  
 }

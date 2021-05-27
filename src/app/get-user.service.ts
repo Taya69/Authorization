@@ -16,8 +16,7 @@ export class GetUserService {
     return of(userSearch);    
   }
   addUser(user: User) {
-    Users.push(user);
-    
+    Users.push(user);    
   }
   getUsers() :Observable<User[]> {
     return of(Users)
@@ -25,6 +24,18 @@ export class GetUserService {
   getLastId() :Observable<number> {
     const id = Users[Users.length - 1].id
     return of(id)
+  }
+  deleteUser(id: number) {
+    const userSearch =  Users.find((user)=> user.id === id)!;
+    const index = Users.indexOf(userSearch);
+    Users.splice(index, 1);        
+  }
+  editUser(user1: User) {
+    const userSearch =  Users.find((user) => user.id === user1.id)!;
+    console.log(userSearch, user1)
+    const index = Users.indexOf(userSearch);
+    Users.splice(index, 1, user1); 
+    console.log(Users)      
   }
   constructor() { }
 }

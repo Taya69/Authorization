@@ -19,6 +19,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { VerificationComponent, DialogForVerification } from './verification/verification.component';
 import { RestoreOfPasswordComponent } from './restore-of-password/restore-of-password.component';
 import { AuthGuard } from './auth.guard';
+import { AdminPageComponent } from './home/admin-page/admin-page.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AuthGuard } from './auth.guard';
     DialogDataExampleDialog,
     VerificationComponent,
     DialogForVerification,
-    RestoreOfPasswordComponent    
+    RestoreOfPasswordComponent,
+    AdminPageComponent    
   ],
   imports: [
     BrowserModule,

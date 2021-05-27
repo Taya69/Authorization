@@ -1,0 +1,55 @@
+/* HeroesComponent's private CSS styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .heroes {
+      margin: 0 0 2em 0;
+      list-style-type: none;
+      padding: 0;      
+    }  
+    
+   
+    .heroes mat-list-item {
+      cursor: pointer;
+      position: relative;
+      left: 0;
+      background-color: #EEE;
+      margin: .5em;
+      padding: .3em 0;
+      height: 1.6em;
+      border-radius: 4px;
+    }
+    .heroes mat-list-item:hover {
+      color: #2c3a41;
+      background-color: #e6e6e6;
+      left: .1em;
+    }
+    .badge {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    .example-form {
+      display: flex;    
+      
+    }
+    .add-button {
+      margin-left: 1rem;
+      max-height: 50px;
+    }
+    h2 {
+      text-align: center;
+    }
+    mat-icon {
+      text-align: end;
+    }
+
+    .containerLittle {
+      display: flex;
+      justify-content: end;
+    }
+    
+    
+   
