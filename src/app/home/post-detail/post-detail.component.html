@@ -1,0 +1,13 @@
+<div *ngIf="post" class="container">
+    <button (click)="goBack()" mat-button>go back</button>
+      <h2>{{post.title | uppercase}} Details</h2>
+      <div><span>id: </span>{{post.id}}</div>    
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Post title: </mat-label>
+          <input matInput placeholder="name" [(ngModel)]="post.title" id="post-title" name="first">
+        </mat-form-field>   
+      </form>
+      <button mat-button (click)="save()">save</button>
+    </div>
+<div *ngFor='let el of comments'>{{el.body}}</div>

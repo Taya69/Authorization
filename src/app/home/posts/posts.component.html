@@ -1,0 +1,42 @@
+<form class="example-form" (ngSubmit)="addPost($event); postTitle.value=''">
+  <mat-form-field class="example-full-width">
+    <mat-label>Post: </mat-label>
+    <input matInput placeholder="Enter post" #postTitle name="first">
+  </mat-form-field> 
+  <button class="add-button" mat-raised-button matSuffix>
+    add post
+  </button> 
+ <app-search (onChanged)='onChanged($event)'></app-search>
+</form>
+<mat-card *ngFor='let el of posts$ | async'>
+  {{el.title}}{{el.id}}{{el.author}}
+  <mat-card-actions>
+    <a routerLink = "{{el.id}}"><button mat-button (click)='edit(el)'>edit</button></a>
+    <button mat-button (click)=delete(el)>delete</button>
+  </mat-card-actions>
+</mat-card>
+
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+   
+    <ng-container matColumnDef="post">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>  
+    
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let element"><mat-icon matSuffix>edit</mat-icon></td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element"> <mat-icon matSuffix>delete</mat-icon> </td>
+    </ng-container>  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table> -->
+  
+
+  

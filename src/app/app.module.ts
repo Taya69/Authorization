@@ -20,6 +20,9 @@ import { VerificationComponent, DialogForVerification } from './verification/ver
 import { RestoreOfPasswordComponent } from './restore-of-password/restore-of-password.component';
 import { AuthGuard } from './auth.guard';
 import { AdminPageComponent } from './home/admin-page/admin-page.component';
+import { PostsComponent } from './home/posts/posts.component';
+import { PostDetailComponent } from './home/post-detail/post-detail.component';
+import { SearchComponent } from './home/posts/search/search.component';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { AdminPageComponent } from './home/admin-page/admin-page.component';
     VerificationComponent,
     DialogForVerification,
     RestoreOfPasswordComponent,
-    AdminPageComponent    
+    AdminPageComponent,
+    PostsComponent,
+    PostDetailComponent,
+    SearchComponent    
   ],
   imports: [
     BrowserModule,

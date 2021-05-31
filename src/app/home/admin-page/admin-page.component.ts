@@ -8,6 +8,7 @@ import { User } from 'src/user';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
+  
   nameUser : string = '';
   passwordUser : string = '';
   codeUser : string = ''

@@ -1,4 +1,5 @@
 /* HeroesComponent's private CSS styles */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -46,10 +47,7 @@
       text-align: end;
     }
 
-    .containerLittle {
-      display: flex;
-      justify-content: end;
-    }
+   
     
     
    

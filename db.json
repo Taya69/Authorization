@@ -1,0 +1,26 @@
+{
+  "posts": [
+    {
+      "id": 15,
+      "title": "Magnetaiiiiii",
+      "author": "myuser@mail.ru"
+    },
+    {
+      "id": 17,
+      "title": "Magneta",
+      "author": "myuser@mail.ru"
+    },
+    {
+      "id": 18,
+      "title": "Magneta",
+      "author": "myuser@mail.ru"
+    }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 15 },
+    { "id": 2, "body": "some commentffff", "postId": 15 }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

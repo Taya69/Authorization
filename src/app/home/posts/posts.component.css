@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+  }
+
+ mat-card {  
+  text-align: center;
+  font-size: large;
+  font-weight: 600;
+ } 
+ mat-card-header {
+   text-align: center;
+ }
