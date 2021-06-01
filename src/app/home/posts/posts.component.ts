@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit {
     this.postService.getPosts().subscribe((posts)=> this.dataSource = posts);
     this.posts$ = this.searchTerms.pipe(      
       debounceTime(300),      
-      distinctUntilChanged(),      
+      //distinctUntilChanged(),      
       switchMap((term: string) => {return this.postService.searchPosts(term)} ),
     ); 
       
@@ -39,6 +39,6 @@ export class PostsComponent implements OnInit {
     this.postService.addPost(post1).subscribe(() => {this.searchTerms.next(' '); } );    
   } 
   delete (el : Post) {
-    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next('  '); })
+    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); })
   } 
 }
