@@ -32,10 +32,20 @@ export class GetUserService {
   }
   editUser(user1: User) {
     const userSearch =  Users.find((user) => user.id === user1.id)!;
-    console.log(userSearch, user1)
+  //  console.log(userSearch, user1)
     const index = Users.indexOf(userSearch);
     Users.splice(index, 1, user1); 
-    console.log(Users)      
+  //  console.log(Users)      
+  }
+  testNameOfUser (name : string) : boolean {
+    let searchName = Users.find((user)=> user.name = name)
+    console.log(searchName)
+    if (searchName !== undefined) {      
+      return true
+    } else {      
+      return false
+    }
+    
   }
   constructor() { }
 }

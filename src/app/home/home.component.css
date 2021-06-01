@@ -1,0 +1,6 @@
+.logout {
+    justify-self: end;
+}
+mat-toolbar {
+    justify-content: space-between;
+}

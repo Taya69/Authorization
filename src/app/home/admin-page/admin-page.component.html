@@ -1,35 +1,24 @@
+<button mat-button (click)='add()'>Add user</button>
 <h2>Users</h2>
-<div class="container">
+<div class="container">  
 <mat-list role="list" class="heroes">
-  <mat-list-item role="listitem" *ngFor="let user of users"> 
-    <div class="containerLittle">    
+  <div *ngFor="let user of users" class="justify">
+  <mat-list-item role="listitem" >     
+    <div class="content">   
      <span class="badge">{{user.id}}</span>  
-     <span class="badge">{{user.name}}</span>  
-     <mat-icon matSuffix (click)='nameUser=user.name; passwordUser=user.password; codeUser=user.code; addEdit = !addEdit; editingUserId=user.id'>
-         edit</mat-icon>
-     <mat-icon (click)="delete(user)">delete</mat-icon>
-    </div>     
+     <span class="badge">{{user.name}}</span> 
+    </div> 
+   
   </mat-list-item>
- 
+  <div class="content"> 
+    <mat-icon matSuffix (click)='edit(user)'>
+        edit</mat-icon>
+    <mat-icon (click)="delete(user)">delete</mat-icon>
+   </div> 
+  </div> 
 </mat-list>
 <div>
-<form class="example-form" (ngSubmit)="add($event); userName.value=''; userPassword.value=''; userCode.value=''">
-  <mat-form-field class="example-full-width">
-    <mat-label>User name: </mat-label>
-    <input matInput placeholder="Enter hero name" #userName id="new-hero" [(ngModel)]='nameUser' name="first">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Password: </mat-label>
-    <input matInput placeholder="Enter hero name" #userPassword id="new-hero" [(ngModel)]='passwordUser' name="second">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Code word: </mat-label>
-    <input matInput placeholder="Enter hero name" #userCode id="new-hero" [(ngModel)]='codeUser' name="third">
-  </mat-form-field>
-  <button class="add-button" mat-raised-button matSuffix>
-    {{addEdit ? "add user" : "edit user"}}
-  </button>  
-</form>
+
   <!-- (click) passes input value to add() and then clears the input -->
  
 </div>

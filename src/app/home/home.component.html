@@ -3,8 +3,10 @@
       <nav>
         <button mat-button><a routerLink="/home">Main</a></button>
         <button mat-button><a routerLink="/home/posts">Posts</a></button> 
-        <button mat-button><a routerLink="/home/admin">Admin</a></button>                  
+        <button mat-button><a routerLink="/home/admin">Admin</a></button> 
+                         
       </nav>
+      <button mat-button><a routerLink="/" class='logout' (click)='clearUser()'>Logout</a></button> 
     </mat-toolbar>
   </p>
 

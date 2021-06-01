@@ -12,22 +12,23 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class AuthorizationComponent implements OnInit {
 
-  hide: boolean = false;
+  hide: boolean = true;
 
   constructor(private fb: FormBuilder, private userService: GetUserService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit() {    
   }
-
+ 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(1)]]
   }) 
   onLogin(event: any) {
     if (!this.loginForm.valid) {
       return;
-    }     
+    }         
+  
     this.userService.findUser(event.target[0].value).subscribe(
       (user)=> {
         if (user === undefined) {          

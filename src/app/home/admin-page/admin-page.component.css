@@ -46,7 +46,18 @@
     mat-icon {
       text-align: end;
     }
-
+    .containerLittle {
+      display: flex;
+      justify-content: space-between;
+    }
+    .justify {
+      display: flex;
+      justify-content: space-between;
+    }
+.content {
+  display: flex;
+  align-items: center;
+}
    
     
     

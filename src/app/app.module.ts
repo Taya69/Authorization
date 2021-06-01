@@ -19,7 +19,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { VerificationComponent, DialogForVerification } from './verification/verification.component';
 import { RestoreOfPasswordComponent } from './restore-of-password/restore-of-password.component';
 import { AuthGuard } from './auth.guard';
-import { AdminPageComponent } from './home/admin-page/admin-page.component';
+import { AdminPageComponent, EditDeleteDialog } from './home/admin-page/admin-page.component';
 import { PostsComponent } from './home/posts/posts.component';
 import { PostDetailComponent } from './home/post-detail/post-detail.component';
 import { SearchComponent } from './home/posts/search/search.component';
@@ -38,7 +38,8 @@ import { SearchComponent } from './home/posts/search/search.component';
     AdminPageComponent,
     PostsComponent,
     PostDetailComponent,
-    SearchComponent    
+    SearchComponent ,
+    EditDeleteDialog   
   ],
   imports: [
     BrowserModule,

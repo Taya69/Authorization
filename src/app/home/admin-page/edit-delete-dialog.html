@@ -1,0 +1,39 @@
+
+    <div mat-dialog-content>
+      <form  name="loginForm"(ngSubmit)='save($event)' [formGroup]="loginForm">        
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input              
+              matInput
+              required
+              [value]="data.name" 
+              formControlName="email" 
+              [ngModel]='data.name'           
+            /> 
+            <mat-error *ngIf="!loginForm.controls['email'].valid">
+              Email is required
+            </mat-error>          
+          </mat-form-field>  
+          <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input             
+            matInput
+            required            
+            formControlName="password"
+            [ngModel]='data.password'           
+          />  
+          <mat-error *ngIf="!loginForm.controls['password'].valid">
+            Password is required
+          </mat-error>       
+        </mat-form-field>  
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Code word</mat-label>
+          <input              
+            matInput
+            required
+            [value]="data.code"            
+          />           
+        </mat-form-field>       
+        <button mat-flat-button color="primary">{{data.edit ? 'edit' : "add"}}</button>
+      </form>       
+    </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { GetUserService } from '../get-user.service'
 import {Router} from '@angular/router'
+import { Users } from 'src/mock-users';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {Router} from '@angular/router'
 })
 export class RegistrationComponent implements OnInit {
   id : number = 0;
-  hide: boolean = false;
+  hide: boolean = true;
 
   constructor(private fb: FormBuilder, private userService: GetUserService, private router: Router) {
   }
@@ -20,14 +21,20 @@ export class RegistrationComponent implements OnInit {
   }
 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(1)]]
   })
     
   addUser(event: any) {
+    console.log(Users)
     if (!this.loginForm.valid) {
       return;
     }
+    
+    // if (this.userService.testNameOfUser(event.target[0].value)) {
+    //   alert('this mail occupied')
+    //   return
+    // }
     this.userService.getLastId().subscribe((id) => {
       console.log(id)
       this.id = id+1
