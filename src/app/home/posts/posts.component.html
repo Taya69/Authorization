@@ -11,7 +11,7 @@
 <mat-card *ngFor='let el of posts$ | async'>
   {{el.title}}{{el.id}}{{el.author}}
   <mat-card-actions>
-    <a routerLink = "{{el.id}}"><button mat-button (click)='edit(el)'>edit</button></a>
+    <a routerLink = "{{el.id}}"><button mat-button>edit</button></a>
     <button mat-button (click)=delete(el)>delete</button>
   </mat-card-actions>
 </mat-card>

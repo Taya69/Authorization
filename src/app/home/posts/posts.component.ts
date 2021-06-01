@@ -12,7 +12,7 @@ import {SearchComponent} from '../posts/search/search.component'
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  constructor(private postService: PostsService, private app1 : ApplicationRef, private app2 : ApplicationRef) {
+  constructor(private postService: PostsService) {
     
    }
  // displayedColumns: string[] = ['post', 'edit', 'delete'];
@@ -36,12 +36,9 @@ export class PostsComponent implements OnInit {
      this.postService.getLastId().subscribe((data) => id = data+1)
      let author = String(localStorage.getItem('key'));
     const post1 = { "id": id, "title": event.target[0].value, "author": author};   
-    this.postService.addPost(post1).subscribe(() => {this.searchTerms.next(' '); this.app1.tick()} );    
-  }
-  edit(el: Post) {
-    
-  }
+    this.postService.addPost(post1).subscribe(() => {this.searchTerms.next(' '); } );    
+  } 
   delete (el : Post) {
-    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); this.app2.tick()})
+    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next('  '); })
   } 
 }
