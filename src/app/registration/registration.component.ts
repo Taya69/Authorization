@@ -28,25 +28,26 @@ export class RegistrationComponent implements OnInit {
   addUser(event: any) {
     console.log(Users)
     if (!this.loginForm.valid) {
+      console.log('invalid')
       return;
+    }    
+    if (this.userService.testNameOfUser(event.target[0].value)) {
+      console.log('occupied')
+      return
     }
-    
-    // if (this.userService.testNameOfUser(event.target[0].value)) {
-    //   alert('this mail occupied')
-    //   return
-    // }
     this.userService.getLastId().subscribe((id) => {
       console.log(id)
       this.id = id+1
     })
-        
+     console.log('berofe add')   
     this.userService.addUser({
       id: this.id,
       name: event.target[0].value,
       password: event.target[1].value,
       code: ''
     }     
-    )    
+    ) 
+    console.log('after add')   
     this.router.navigate( ['/verification',], 
     {
         queryParams:{

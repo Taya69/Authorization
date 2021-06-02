@@ -74,8 +74,13 @@ export class EditDeleteDialog {
     save (event: any) {
         if (!this.loginForm.valid) {
       return;
-        }     
-      if (!this.data.edit) {           
+        } 
+             
+      if (!this.data.edit) {
+        if (this.userService.testNameOfUser(event.target[0].value)) {
+          alert('this mail occupied')
+          return
+        }         
         let idAdding = 0;
         this.userService.getLastId().subscribe(id => idAdding = id+1);    
         const userAdding = {
@@ -84,13 +89,13 @@ export class EditDeleteDialog {
           password: event.target[1].value,
           code: event.target[2].value
         } 
-        // if (this.userService.testNameOfUser(event.target[0].value)) {
-        //   alert('this mail occupied')
-        //   return
-        // }        
+            
         this.userService.addUser(userAdding);
       } else { 
-           
+        if (this.userService.testNameOfUser(event.target[0].value) && (event.target[0].value !== this.data.name)) {          
+          alert('this mail occupied')
+          return
+        }    
         const userEdiding = {
           id: this.data.id,
           name: event.target[0].value,

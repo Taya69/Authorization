@@ -38,8 +38,8 @@ export class GetUserService {
   //  console.log(Users)      
   }
   testNameOfUser (name : string) : boolean {
-    let searchName = Users.find((user)=> user.name = name)
-    console.log(searchName)
+    let searchName = Users.find((user)=> user.name === name)
+    
     if (searchName !== undefined) {      
       return true
     } else {      
