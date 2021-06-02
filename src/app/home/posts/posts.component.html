@@ -2,10 +2,11 @@
   <mat-form-field class="example-full-width">
     <mat-label>Post: </mat-label>
     <input matInput placeholder="Enter post" #postTitle name="first">
+    <button class="add-button" mat-button matSuffix>
+      add post
+    </button> 
   </mat-form-field> 
-  <button class="add-button" mat-raised-button matSuffix>
-    add post
-  </button> 
+  
  <app-search (onChanged)='onChanged($event)'></app-search>
 </form>
 <mat-card *ngFor='let el of posts$ | async'>
