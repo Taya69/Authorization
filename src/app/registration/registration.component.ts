@@ -44,7 +44,7 @@ export class RegistrationComponent implements OnInit {
       id: this.id,
       name: event.target[0].value,
       password: event.target[1].value,
-      code: ''
+      code: ''      
     }     
     ) 
     console.log('after add')   

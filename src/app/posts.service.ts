@@ -5,6 +5,8 @@ import { catchError, find, map, tap } from 'rxjs/operators';
 import { Post } from 'src/post';
 import { Comment } from 'src/comment';
 
+const postUrl = 'http://localhost:3000/posts';
+const commentsUrl = 'http://localhost:3000/comments'
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +16,11 @@ export class PostsService {
   };
   constructor( private http: HttpClient) { }
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:3000/posts');
+    return this.http.get<Post[]>(postUrl);
   }
   addPost(post : Post) : Observable<Post>{
     
-    return this.http.post<Post>('http://localhost:3000/posts', post, this.httpOptions).pipe(         
+    return this.http.post<Post>(postUrl, post, this.httpOptions).pipe(         
       catchError(this.handleError<Post>('addPost'))
     );
     
@@ -40,33 +42,33 @@ export class PostsService {
   }
   searchPosts(term: string): Observable<Post[]> {
     if (!term.trim()) {
-      return this.http.get<Post[]>(`http://localhost:3000/posts`).pipe(           
+      return this.http.get<Post[]>(postUrl).pipe(           
         catchError(this.handleError<Post[]>('searchHeroes', []))
       );      
     }
-    return this.http.get<Post[]>(`http://localhost:3000/posts?title=${term}`).pipe(          
+    return this.http.get<Post[]>(`${postUrl}?title=${term}`).pipe(          
       catchError(this.handleError<Post[]>('searchHeroes', []))
     );
   }
   deletePost(id: number): Observable<Post> {
-    const url = `http://localhost:3000/posts/${id}`;  
+    const url = `${postUrl}/${id}`;  
     return this.http.delete<Post>(url, this.httpOptions).pipe(      
       catchError(this.handleError<Post>('deleteHero'))
     );
   }
   updatePost(post: Post): Observable<any> {
-    return this.http.put(`http://localhost:3000/posts/${post.id}`, post, this.httpOptions).pipe(      
+    return this.http.put(`${postUrl}/${post.id}`, post, this.httpOptions).pipe(      
       catchError(this.handleError<any>('updateHero'))
     );
   }
   getPost(id: number): Observable<Post> {
-    const url = `http://localhost:3000/posts/${id}`;
+    const url = `${postUrl}/${id}`;
     return this.http.get<Post>(url).pipe(      
       catchError(this.handleError<Post>(`getHero id=${id}`))
     );
   }
   getComment(postId: number): Observable<Comment[]> {
-    const url = `http://localhost:3000/comments?postId=${postId}`;
+    const url = `${commentsUrl}?postId=${postId}`;
     return this.http.get<Comment[]>(url)    
   }
 }

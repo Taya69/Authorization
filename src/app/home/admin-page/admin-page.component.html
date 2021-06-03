@@ -1,6 +1,6 @@
 <button mat-button (click)='add()'>Add user</button>
 <h2>Users</h2>
-<div class="container">  
+<div class="container"> 
 <mat-list role="list" class="heroes">
   <div *ngFor="let user of users" class="justify">
   <mat-list-item role="listitem" >     
@@ -8,7 +8,7 @@
      <span class="badge">{{user.id}}</span>  
      <span class="badge">{{user.name}}</span> 
     </div> 
-   
+  <img [src]="user.avatar" alt="user"/> 
   </mat-list-item>
   <div class="content"> 
     <mat-icon matSuffix (click)='edit(user)'>
@@ -17,10 +17,6 @@
    </div> 
   </div> 
 </mat-list>
-<div>
 
-  <!-- (click) passes input value to add() and then clears the input -->
- 
-</div>
 </div>
 

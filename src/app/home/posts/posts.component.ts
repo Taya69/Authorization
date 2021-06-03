@@ -41,4 +41,5 @@ export class PostsComponent implements OnInit {
   delete (el : Post) {
     this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); })
   } 
+ 
 }

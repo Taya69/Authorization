@@ -52,7 +52,7 @@ import { SearchComponent } from './home/posts/search/search.component';
     DemoMaterialModule,
     CommonModule,
     MatNativeDateModule,    
-    HttpClientModule
+    HttpClientModule,    
   ],
   providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthGuard],
   bootstrap: [AppComponent]

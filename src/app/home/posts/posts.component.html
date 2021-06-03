@@ -1,4 +1,5 @@
 <form class="example-form" (ngSubmit)="addPost($event); postTitle.value=''">
+  <div class="container">
   <mat-form-field class="example-full-width">
     <mat-label>Post: </mat-label>
     <input matInput placeholder="Enter post" #postTitle name="first">
@@ -8,9 +9,10 @@
   </mat-form-field> 
   
  <app-search (onChanged)='onChanged($event)'></app-search>
+</div>
 </form>
 <mat-card *ngFor='let el of posts$ | async'>
-  {{el.title}}{{el.id}}{{el.author}}
+  {{el.title}}-{{el.id}}-{{el.author}}
   <mat-card-actions>
     <a routerLink = "{{el.id}}"><button mat-button>edit</button></a>
     <button mat-button (click)=delete(el)>delete</button>

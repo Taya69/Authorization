@@ -1,20 +1,32 @@
 {
   "posts": [
     {
-      "id": 18,
-      "title": "Magneta",
-      "author": "myuser@mail.ru"
+      "id": 19,
+      "title": "Magneta99999",
+      "author": "Narco"
     },
     {
-      "id": 19,
-      "title": "Magneta",
-      "author": "Narco"
+      "id": 20,
+      "title": "Dr Nice1",
+      "author": "Dr@dddd.ty"
+    },
+    {
+      "id": 21,
+      "title": "Dr Ni7777",
+      "author": "Narco@jhgyf"
     }
   ],
   "comments": [
-    { "id": 1, "body": "some comment", "postId": 19 },
-    { "id": 2, "body": "some comment2", "postId": 19 },
-    { "id": 3, "body": "some comment3", "postId": 18 }
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 19
+    },
+    {
+      "id": 2,
+      "body": "some comment2",
+      "postId": 19
+    }
   ],
   "profile": {
     "name": "typicode"

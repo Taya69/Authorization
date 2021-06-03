@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorage } from 'lowdb/lib';
 
 @Component({
   selector: 'app-home',
@@ -13,5 +14,10 @@ export class HomeComponent implements OnInit {
   }
   clearUser() {
     localStorage.removeItem('key')
+    localStorage.removeItem('id')
+  }
+  getSrc (): string {    
+    const src = `/assets/users/user${Number(localStorage.getItem('id'))}.jpg`
+    return src
   }
 }

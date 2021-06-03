@@ -10,3 +10,10 @@ table {
  mat-card-header {
    text-align: center;
  }
+ .container {
+   display: flex;
+   justify-content: space-around;
+ }
+ .add-button {
+   margin-bottom: 8%;
+ }

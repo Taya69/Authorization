@@ -4,29 +4,63 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dial
 import { GetUserService } from 'src/app/get-user.service';
 import { User } from 'src/user';
 
+
 export interface DialogData {  
   name: string;
   edit: boolean;
   password: string;
   code: string;
-  id: number
+  id: number;
+  
 }
 
 @Component({
   selector: 'app-admin-page',
-  templateUrl: './admin-page.component.html',
+  templateUrl: './admin-page-card.component.html',
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {  
   
   users: User[] = []; 
   addEdit: boolean = true;  
-
+  cols: number = 3
   constructor(private userService: GetUserService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getUsers();
+    this.getUsers(); 
+    if (screen.width > 800) {
+      this.cols = 3
+   } else { 
+   if (screen.width <=800 && screen.width > 560) {
+     this.cols = 2
+  } else {
+    this.cols = 1
+  }
   } 
+}
+  onResize(event : any) {
+    if (event.target.innerWidth > 800) {
+       this.cols = 3
+    } else { 
+    if (event.target.innerWidth <=800 && event.target.innerWidth > 560) {
+      this.cols = 2
+   } else {
+     this.cols = 1
+   }
+  }
+    }
+  getAvatar(user: User): string {    
+    let url = `/assets/users/user${user.id}.jpg`
+    return url
+  }
+  onImageLoad () {
+    let img = document.getElementById('test')
+    //try {img.src = this.getAvatar}
+    
+  }
+  onImageNotLoad () {
+
+  }
   getUsers(): void {
     this.userService.getUsers()
     .subscribe(users => this.users = users);
@@ -87,7 +121,7 @@ export class EditDeleteDialog {
           id: idAdding,
           name: event.target[0].value,
           password: event.target[1].value,
-          code: event.target[2].value
+          code: event.target[2].value          
         } 
             
         this.userService.addUser(userAdding);
@@ -100,7 +134,7 @@ export class EditDeleteDialog {
           id: this.data.id,
           name: event.target[0].value,
           password: event.target[1].value,
-          code: event.target[2].value
+          code: event.target[2].value          
         }     
         this.userService.editUser(userEdiding)        
       }

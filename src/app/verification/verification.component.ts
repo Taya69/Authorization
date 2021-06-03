@@ -31,11 +31,13 @@ export class VerificationComponent implements OnInit {
         if (this.mode === "install"){
           user.code = event.target[0].value
           this.route.navigate(['/home'])
-          localStorage.setItem("key", user.name) }
+          localStorage.setItem("key", user.name)
+          localStorage.setItem("id", String(user.id)) }
         if (this.mode === "confirmation") {          
           if (user.code === event.target[0].value) {
             this.route.navigate(['/home'])
-            localStorage.setItem("key", user.name)  } 
+            localStorage.setItem("key", user.name) 
+            localStorage.setItem("id", String(user.id)) } 
           else {
             this.dialog.open(DialogForVerification)
           }

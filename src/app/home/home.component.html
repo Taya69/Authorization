@@ -6,7 +6,10 @@
         <button mat-button><a routerLink="/home/admin">Admin</a></button> 
                          
       </nav>
+      <div class='container2'>
       <button mat-button><a routerLink="/" class='logout' (click)='clearUser()'>Logout</a></button> 
+      <img [src]='getSrc()' alt="avatar"/>
+    </div>
     </mat-toolbar>
   </p>
 
