@@ -38,6 +38,9 @@ export class AdminPageComponent implements OnInit {
   }
   } 
 }
+getAbleOfButton(user: User) {
+  return user.name === localStorage.getItem('key')
+}
   onResize(event : any) {
     if (event.target.innerWidth > 800) {
        this.cols = 3
@@ -75,10 +78,11 @@ export class AdminPageComponent implements OnInit {
       console.log(result);
       
     });
-  }
-  delete(user: User): void { 
-    if (localStorage.getItem('key') === user.name) {return}  
-  this.userService.deleteUser(user.id);
+  }  
+  confirm (user : User) {
+    this.dialog.open(ConfimationDialog, {      
+      data: {id : user.id}
+    });
   }
   edit (user : User) {
     this.addEdit = true;
@@ -97,22 +101,29 @@ export class AdminPageComponent implements OnInit {
 @Component({
   selector: 'edit-delete-dialog',
   templateUrl: 'edit-delete-dialog.html',
+  styleUrls: ['./admin-page.component.css']
 })
 export class EditDeleteDialog {
   constructor(  public dialogRef: MatDialogRef<EditDeleteDialog>, private userService: GetUserService, private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
     loginForm: FormGroup = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(1)]]
+      password: ['', [Validators.required, Validators.minLength(1)]],
+      code: ['', [Validators.required, Validators.minLength(1)]]
     }) 
+    validation: boolean = false
+    testOfName: boolean = false
     save (event: any) {
         if (!this.loginForm.valid) {
+          this.validation = true          
       return;
         } 
              
       if (!this.data.edit) {
+        this.validation = false
+        this.testOfName = false
         if (this.userService.testNameOfUser(event.target[0].value)) {
-          alert('this mail occupied')
+          this.testOfName = true
           return
         }         
         let idAdding = 0;
@@ -127,7 +138,7 @@ export class EditDeleteDialog {
         this.userService.addUser(userAdding);
       } else { 
         if (this.userService.testNameOfUser(event.target[0].value) && (event.target[0].value !== this.data.name)) {          
-          alert('this mail occupied')
+          this.testOfName = true
           return
         }    
         const userEdiding = {
@@ -140,4 +151,27 @@ export class EditDeleteDialog {
       }
      this.dialogRef.close()
     }
+    cancel () {
+      this.dialogRef.close()
+    }
 }
+
+@Component({
+  selector: 'confimation-dialog',
+  templateUrl: 'confirmation-dialog.html',
+  styleUrls: ['./admin-page.component.css']
+})
+export class ConfimationDialog {
+  
+constructor (@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialogRef2: MatDialogRef<ConfimationDialog>,
+private userService: GetUserService) {}
+closeDialog () {
+  this.dialogRef2.close()
+}
+
+delete(): void {  
+  this.userService.deleteUser(this.data.id);
+  this.dialogRef2.close()
+}
+}
+

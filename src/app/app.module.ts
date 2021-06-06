@@ -19,10 +19,11 @@ import { RegistrationComponent } from './registration/registration.component';
 import { VerificationComponent, DialogForVerification } from './verification/verification.component';
 import { RestoreOfPasswordComponent } from './restore-of-password/restore-of-password.component';
 import { AuthGuard } from './auth.guard';
-import { AdminPageComponent, EditDeleteDialog } from './home/admin-page/admin-page.component';
+import { AdminPageComponent, ConfimationDialog, EditDeleteDialog } from './home/admin-page/admin-page.component';
 import { PostsComponent } from './home/posts/posts.component';
 import { PostDetailComponent } from './home/post-detail/post-detail.component';
 import { SearchComponent } from './home/posts/search/search.component';
+import { UserOfficeComponent } from './home/user-office/user-office.component';
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { SearchComponent } from './home/posts/search/search.component';
     PostsComponent,
     PostDetailComponent,
     SearchComponent ,
-    EditDeleteDialog   
+    EditDeleteDialog,
+    UserOfficeComponent,
+    ConfimationDialog
   ],
   imports: [
     BrowserModule,

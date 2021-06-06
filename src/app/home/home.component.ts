@@ -17,7 +17,10 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('id')
   }
   getSrc (): string {    
-    const src = `/assets/users/user${Number(localStorage.getItem('id'))}.jpg`
+    const src = `/assets/users/user${Number(localStorage.getItem('id'))}.jpg`    
     return src
+  }
+  getUsername () {
+    return localStorage.getItem('key')
   }
 }

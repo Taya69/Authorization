@@ -1,16 +1,15 @@
 <p>
     <mat-toolbar>
       <nav>
-        <button mat-button><a routerLink="/home">Main</a></button>
-        <button mat-button><a routerLink="/home/posts">Posts</a></button> 
-        <button mat-button><a routerLink="/home/admin">Admin</a></button> 
-                         
-      </nav>
-      <div class='container2'>
-      <button mat-button><a routerLink="/" class='logout' (click)='clearUser()'>Logout</a></button> 
-      <img [src]='getSrc()' alt="avatar"/>
-    </div>
+        <button mat-button routerLink="/home">Main</button>
+        <button mat-button routerLink="/home/posts">Posts</button> 
+        <button mat-button routerLink="/home/admin">Admin</button>                          
+      </nav>        
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/account">{{getUsername()}}</button> 
+          <button mat-menu-item routerLink="/" class='logout' (click)='clearUser()'>Logout</button>                   
+        </mat-menu>      
+        <img [src]='getSrc()' alt="avatar" onerror="this.src='/assets/users/undefined.jpg'" [matMenuTriggerFor]="menu"/>          
     </mat-toolbar>
   </p>
-
 <router-outlet></router-outlet>

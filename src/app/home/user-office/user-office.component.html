@@ -1,0 +1,5 @@
+<button mat-button (click)="goBack()" mat-button>go back</button>
+<div class="container">
+    <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar"/>
+    <h2>{{getUsername()}}</h2>    
+</div>

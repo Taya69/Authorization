@@ -17,11 +17,10 @@ export class VerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.queryParams.subscribe((param) => {this.mode = param.mode, this.id = param.userId})
-  }
-
-  verifyForm: FormGroup = this.fb.group({
-    email: ['',],
-  })
+  } 
+  verifyForm: FormGroup = this.fb.group({    
+    code: ['', [Validators.required, Validators.minLength(1)]]
+  }) 
   verify(event: any) {
     if (!this.verifyForm.valid) {
       return;

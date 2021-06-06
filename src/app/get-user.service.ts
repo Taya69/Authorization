@@ -38,7 +38,7 @@ export class GetUserService {
   //  console.log(Users)      
   }
   testNameOfUser (name : string) : boolean {
-    let searchName = Users.find((user)=> user.name === name)
+    let searchName = Users.find((user)=> user.name.toUpperCase() === name.toUpperCase())
     
     if (searchName !== undefined) {      
       return true

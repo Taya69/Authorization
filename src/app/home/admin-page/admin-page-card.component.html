@@ -11,15 +11,15 @@
       <img mat-card-image id="test"
       [src]="getAvatar(user)" 
       (load)="onImageLoad()"
-      (error)='onImageNotLoad()'    
+      onerror='this.src = "/assets/users/undefined.jpg"'    
       alt="Photo of a Shiba Inu">
       <mat-card-content>
       
       </mat-card-content>
       <mat-card-actions>
-        <mat-icon matSuffix (click)='edit(user)'>
-          edit</mat-icon>
-      <mat-icon (click)="delete(user)">delete</mat-icon>
+        <button mat-button [disabled]='getAbleOfButton(user)'> <mat-icon matSuffix (click)='edit(user)'>
+          edit</mat-icon></button>
+      <button mat-button [disabled]='getAbleOfButton(user)'><mat-icon (click)="confirm(user)">delete</mat-icon></button>
     </mat-card-actions>    
 </mat-card>
 </mat-grid-tile>

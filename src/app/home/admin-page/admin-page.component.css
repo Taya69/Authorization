@@ -77,6 +77,13 @@
   @media (min-width: 960px) {
     
   }
+  .message {    
+    text-align: center;    
+  }
+  .end {
+    text-align: end;
+    margin-left: 80%;
+  }
   
     
     
