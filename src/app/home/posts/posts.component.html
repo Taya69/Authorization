@@ -1,15 +1,11 @@
-<form class="example-form" (ngSubmit)="addPost($event); postTitle.value=''">
-  <div class="container">
-  <mat-form-field class="example-full-width">
-    <mat-label>Post: </mat-label>
-    <input matInput placeholder="Enter post" #postTitle name="first">
-    <button class="add-button" mat-button matSuffix>
+<form class="example-form">
+  <div class="container">  
+    <button class="add-button" mat-button matSuffix (click)='addPost()'>
       add post
-    </button> 
-  </mat-form-field> 
-  
+    </button>   
  <app-search (onChanged)='onChanged($event)'></app-search>
 </div>
+<mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
 </form>
 <mat-card *ngFor='let el of posts$ | async'>
   {{el.title}}-{{el.id}}-{{el.author}}
