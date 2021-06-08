@@ -8,7 +8,7 @@
               required
               [value]="data.name" 
               formControlName="email" 
-              [ngModel]='data.name'           
+              [(ngModel)]='email'           
             /> 
             <mat-error *ngIf="!loginForm.controls['email'].valid">
               Email is required
@@ -20,7 +20,7 @@
             matInput
             required            
             formControlName="password"
-            [ngModel]='data.password'           
+            [(ngModel)]='password'           
           />  
           <mat-error *ngIf="!loginForm.controls['password'].valid">
             Password is required
@@ -32,7 +32,7 @@
             matInput
             required
             formControlName="code"
-            [ngModel]="data.code"            
+            [(ngModel)]="code"            
           />
           <mat-error *ngIf="!loginForm.controls['code'].valid">
             Code is required

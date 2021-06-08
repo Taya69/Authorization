@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { GetUserService } from '../get-user.service'
 import {Router} from '@angular/router'
@@ -13,23 +13,21 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class AuthorizationComponent implements OnInit {
 
   hide: boolean = true;
-
+  email1: string = '';
+  password: string = ''
   constructor(private fb: FormBuilder, private userService: GetUserService, private router: Router, public dialog: MatDialog) {
   }
-
   ngOnInit() {    
-  }
- 
+  } 
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(1)]]
   }) 
-  onLogin(event: any) {
+  onLogin() {
     if (!this.loginForm.valid) {
       return;
-    }         
-  
-    this.userService.findUser(event.target[0].value).subscribe(
+    }  
+    this.userService.findUser(this.email1).subscribe(
       (user)=> {
         if (user === undefined) {          
           this.dialog.open(DialogDataExampleDialog, {
@@ -37,7 +35,7 @@ export class AuthorizationComponent implements OnInit {
           });
             return
         } else {
-          if (!(event.target[1].value === user.password)) { 
+          if (!(this.password === user.password)) { 
             this.dialog.open(DialogDataExampleDialog, {
               data: 'password' 
             });           

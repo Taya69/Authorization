@@ -20,7 +20,6 @@ export class SearchComponent implements OnInit {
   search(term: string): void {
     this.onChanged.emit(term)    
   }
-  ngOnInit(): void {
-   
+  ngOnInit(): void {   
   }
 }

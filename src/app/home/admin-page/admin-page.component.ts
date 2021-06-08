@@ -23,10 +23,11 @@ export class AdminPageComponent implements OnInit {
   
   users: User[] = []; 
   addEdit: boolean = true;  
-  cols: number = 3
+  cols: number = 3;
+  progressBar: boolean = true;
   constructor(private userService: GetUserService, public dialog: MatDialog) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.getUsers(); 
     if (screen.width > 800) {
       this.cols = 3
@@ -66,7 +67,7 @@ getAbleOfButton(user: User) {
   }
   getUsers(): void {
     this.userService.getUsers()
-    .subscribe(users => this.users = users);
+    .subscribe(users => setTimeout(()=> {this.users = users; this.progressBar = false}, 2000) );
   }
   add () {
     this.addEdit = false;
@@ -103,9 +104,17 @@ getAbleOfButton(user: User) {
   templateUrl: 'edit-delete-dialog.html',
   styleUrls: ['./admin-page.component.css']
 })
-export class EditDeleteDialog {
+export class EditDeleteDialog implements OnInit {
   constructor(  public dialogRef: MatDialogRef<EditDeleteDialog>, private userService: GetUserService, private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    email: string = '';
+    password: string = '';
+    code: string = '';
+    ngOnInit(): void {
+      this.email = this.data.name;
+      this.password = this.data.password;
+      this.code = this.data.code
+    }
     loginForm: FormGroup = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(1)]],
@@ -122,7 +131,7 @@ export class EditDeleteDialog {
       if (!this.data.edit) {
         this.validation = false
         this.testOfName = false
-        if (this.userService.testNameOfUser(event.target[0].value)) {
+        if (this.userService.testNameOfUser(this.email)) {
           this.testOfName = true
           return
         }         
@@ -130,22 +139,22 @@ export class EditDeleteDialog {
         this.userService.getLastId().subscribe(id => idAdding = id+1);    
         const userAdding = {
           id: idAdding,
-          name: event.target[0].value,
-          password: event.target[1].value,
-          code: event.target[2].value          
+          name: this.email,
+          password: this.password,
+          code: this.code          
         } 
             
         this.userService.addUser(userAdding);
       } else { 
-        if (this.userService.testNameOfUser(event.target[0].value) && (event.target[0].value !== this.data.name)) {          
+        if (this.userService.testNameOfUser(this.email) && (this.email !== this.data.name)) {          
           this.testOfName = true
           return
         }    
         const userEdiding = {
           id: this.data.id,
-          name: event.target[0].value,
-          password: event.target[1].value,
-          code: event.target[2].value          
+          name: this.email,
+          password: this.password,
+          code: this.code          
         }     
         this.userService.editUser(userEdiding)        
       }

@@ -6,6 +6,7 @@ import { Post } from 'src/post';
 import { Comment } from 'src/comment';
 
 const postUrl = 'http://localhost:3000/posts';
+//const postUrl = 'https://jsonplaceholder.typicode.com/posts'
 const commentsUrl = 'http://localhost:3000/comments'
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class PostsService {
   }
   deletePost(id: number): Observable<Post> {
     const url = `${postUrl}/${id}`;  
-    return this.http.delete<Post>(url, this.httpOptions).pipe(      
+    return this.http.delete<Post>(url).pipe(      
       catchError(this.handleError<Post>('deleteHero'))
     );
   }

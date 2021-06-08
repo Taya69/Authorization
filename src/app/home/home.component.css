@@ -6,7 +6,7 @@ mat-toolbar {
 }
 img {    
     border-radius: 100%;
-    max-height: 50px;
+    max-height: 80%;
 }
 .container2 {
     display: flex;

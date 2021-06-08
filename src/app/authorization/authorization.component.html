@@ -3,14 +3,15 @@
       <div class="header">
         <P>Sign Into Your Account </P>
       </div>
-      <form (ngSubmit)="onLogin($event)" name="loginForm" [formGroup]="loginForm">
+      <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
         <div class="emailInput">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
-            <input
+            <input #email
               formControlName="email"
               matInput
-              placeholder="Enter email address" required            
+              placeholder="Enter email address" required 
+              [(ngModel)]='email1'           
             />
             <mat-error *ngIf="!loginForm.controls['email'].valid">
                 Email is required
@@ -23,7 +24,7 @@
           </span>
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Password</mat-label>
-            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required [(ngModel)]='password'/>
             <button  mat-icon-button matSuffix (click)="hide = !hide; $event.preventDefault()" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="hide">
             <mat-icon>

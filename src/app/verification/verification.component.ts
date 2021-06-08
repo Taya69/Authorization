@@ -11,7 +11,8 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class VerificationComponent implements OnInit {
   mode : string = '';
-  id : number = 0
+  id : number = 0;
+  code: string = '';
   constructor(private router : ActivatedRoute, private fb: FormBuilder, private route: Router,
     private userService: GetUserService, private dialog : MatDialog) { }
 
@@ -28,12 +29,12 @@ export class VerificationComponent implements OnInit {
     this.userService.findUserById(this.id).subscribe (      
       (user) => {
         if (this.mode === "install"){
-          user.code = event.target[0].value
+          user.code = this.code
           this.route.navigate(['/home'])
           localStorage.setItem("key", user.name)
           localStorage.setItem("id", String(user.id)) }
         if (this.mode === "confirmation") {          
-          if (user.code === event.target[0].value) {
+          if (user.code === this.code) {
             this.route.navigate(['/home'])
             localStorage.setItem("key", user.name) 
             localStorage.setItem("id", String(user.id)) } 

@@ -10,7 +10,8 @@
             <input             
               matInput
               placeholder="Enter code word" required
-              formControlName="code"            
+              formControlName="code"
+              [(ngModel)]='code'            
             />
             <mat-error *ngIf="!verifyForm.controls['code'].valid">
                 code is required

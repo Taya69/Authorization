@@ -13,7 +13,8 @@ import { Users } from 'src/mock-users';
 export class RegistrationComponent implements OnInit {
   id : number = 0;
   hide: boolean = true;
-
+  email: string = '';
+  password: string = ''
   constructor(private fb: FormBuilder, private userService: GetUserService, private router: Router) {
   }
 
@@ -25,29 +26,23 @@ export class RegistrationComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(1)]]
   })
     
-  addUser(event: any) {
-    console.log(Users)
-    if (!this.loginForm.valid) {
-      console.log('invalid')
+  addUser(event: any) {    
+    if (!this.loginForm.valid) {      
       return;
     }    
-    if (this.userService.testNameOfUser(event.target[0].value)) {
-      console.log('occupied')
+    if (this.userService.testNameOfUser(this.email)) {      
       return
     }
-    this.userService.getLastId().subscribe((id) => {
-      console.log(id)
+    this.userService.getLastId().subscribe((id) => {      
       this.id = id+1
-    })
-     console.log('berofe add')   
+    })      
     this.userService.addUser({
       id: this.id,
-      name: event.target[0].value,
-      password: event.target[1].value,
+      name: this.email,
+      password: this.password,
       code: ''      
     }     
-    ) 
-    console.log('after add')   
+    )      
     this.router.navigate( ['/verification',], 
     {
         queryParams:{

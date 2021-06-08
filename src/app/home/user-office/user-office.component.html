@@ -1,5 +1,25 @@
 <button mat-button (click)="goBack()" mat-button>go back</button>
 <div class="container">
     <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar"/>
-    <h2>{{getUsername()}}</h2>    
+   
+    <div  *ngIf='user1'> 
+        <h2>{{getUsername()}}</h2>  
+        <mat-label>First name</mat-label>
+        <input     
+        [(ngModel)]='firstName'        
+        matInput
+        required
+        [readonly]='edit'             
+        />
+        <mat-label>Last name</mat-label>
+        <input    
+        [(ngModel)]='lastName'        
+        matInput
+        required 
+        [readonly]='edit'           
+        />
+        <div>
+            <button mat-button (click)='edit = !edit; save()'>{{edit ? "Edit" : "Save"}}</button>
+        </div>
+    </div>  
 </div>

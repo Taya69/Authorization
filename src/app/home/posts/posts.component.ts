@@ -1,9 +1,11 @@
-import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject, interval, Observable, of, Subject } from 'rxjs';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { PostsService } from 'src/app/posts.service';
 import { Post } from 'src/post';
+import { DialogData } from '../admin-page/admin-page.component';
 import {SearchComponent} from '../posts/search/search.component'
 
 @Component({
@@ -12,15 +14,16 @@ import {SearchComponent} from '../posts/search/search.component'
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  constructor(private postService: PostsService) {
-    
+  post: string = ''
+  constructor(private postService: PostsService, public dialog: MatDialog) {    
    }
  // displayedColumns: string[] = ['post', 'edit', 'delete'];
   dataSource : Post[] = []; 
   posts$!: Observable<Post[]>;
+  progressBar : boolean = true
   private searchTerms = new BehaviorSubject<string>('');
   ngOnInit(): void {  
-    this.postService.getPosts().subscribe((posts)=> this.dataSource = posts);
+    this.postService.getPosts().subscribe((posts)=> {this.dataSource = posts; this.progressBar = false});
     this.posts$ = this.searchTerms.pipe(      
       debounceTime(300),      
       //distinctUntilChanged(),      
@@ -31,15 +34,33 @@ export class PostsComponent implements OnInit {
   onChanged(term: string) {
     this.searchTerms.next(term);   
   }
-  addPost (event: any) {
+  addPost () {
+    const DialogRef = this.dialog.open(AdditingOfPostComponent);
+    DialogRef.afterClosed().subscribe((res) => this.postService.addPost(res).subscribe(() => {this.searchTerms.next(' ')}))  
+  } 
+  delete (el : Post) {    
+    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' ')})    
+  } 
+ 
+}
+
+@Component({
+  selector: 'app-add-post',
+  templateUrl: './additingOfPost.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class AdditingOfPostComponent implements OnInit {  
+  post: string = ''
+  constructor(private postService: PostsService, @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  public dialogRef: MatDialogRef<AdditingOfPostComponent>) {    
+   }
+  
+  ngOnInit(): void {}  
+  addPost () {
      let id = 0;
      this.postService.getLastId().subscribe((data) => id = data+1)
      let author = String(localStorage.getItem('key'));
-    const post1 = { "id": id, "title": event.target[0].value, "author": author};   
-    this.postService.addPost(post1).subscribe(() => {this.searchTerms.next(' '); } );    
-  } 
-  delete (el : Post) {
-    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); })
-  } 
- 
+    const post1 = { "id": id, "title": this.post, "author": author};      
+    this.dialogRef.close(post1)  
+  }  
 }

@@ -44,8 +44,6 @@ export class GetUserService {
       return true
     } else {      
       return false
-    }
-    
-  }
-  constructor() { }
+    }    
+  }  
 }
