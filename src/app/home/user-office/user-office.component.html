@@ -1,8 +1,7 @@
 <button mat-button (click)="goBack()" mat-button>go back</button>
 <div class="container">
-    <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar"/>
-   
-    <div  *ngIf='user1'> 
+    <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar"/>   
+    
         <h2>{{getUsername()}}</h2>  
         <mat-label>First name</mat-label>
         <input     
@@ -17,9 +16,6 @@
         matInput
         required 
         [readonly]='edit'           
-        />
-        <div>
-            <button mat-button (click)='edit = !edit; save()'>{{edit ? "Edit" : "Save"}}</button>
-        </div>
-    </div>  
+        />        
+            <button mat-button (click)='edit = !edit; save()'>{{edit ? "Edit" : "Save"}}</button>      
 </div>

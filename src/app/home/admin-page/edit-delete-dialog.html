@@ -1,6 +1,5 @@
-
-    <div mat-dialog-content>
-      <form  name="loginForm"(ngSubmit)='save($event)' [formGroup]="loginForm">        
+      <form  name="loginForm"(ngSubmit)='save($event)' [formGroup]="loginForm"> 
+        <div class="container">       
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
             <input              
@@ -20,7 +19,8 @@
             matInput
             required            
             formControlName="password"
-            [(ngModel)]='password'           
+            [(ngModel)]='password' 
+            type='password'          
           />  
           <mat-error *ngIf="!loginForm.controls['password'].valid">
             Password is required
@@ -37,10 +37,13 @@
           <mat-error *ngIf="!loginForm.controls['code'].valid">
             Code is required
           </mat-error>             
-        </mat-form-field>       
-        <button mat-flat-button>{{data.edit ? 'edit' : "add"}}</button>
-      </form>       
-    </div>
+        </mat-form-field>  
+        <div class="justify">     
+        <button mat-button>{{data.edit ? 'edit' : "add"}}</button>
+        <button mat-button (click)='cancel()'>cancel</button>
+      </div>
+      </div>
+      </form>     
     <div *ngIf='validation' class="message">Fill in the fields correctly</div>
     <div *ngIf='testOfName' class="message">this post is already occupie</div>
-    <button class='end' mat-button (click)='cancel()'>cancel</button>
+    

@@ -51,14 +51,15 @@ const routes: Routes = [
       {
         path: 'posts/:id',
         component: PostDetailComponent
-      },     
+      },
+      {
+        path: 'account',
+        component: UserOfficeComponent,
+        canActivate: [AuthGuard],
+      }     
     ]
   },
-  {
-    path: 'account',
-    component: UserOfficeComponent,
-    canActivate: [AuthGuard],
-  }
+ 
 ];
 
 @NgModule({  

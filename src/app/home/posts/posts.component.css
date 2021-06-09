@@ -17,3 +17,6 @@ table {
  .add-button {
    margin-bottom: 8%;
  }
+ .wrap {
+  word-wrap: break-word;
+ }

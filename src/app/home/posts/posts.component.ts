@@ -23,7 +23,8 @@ export class PostsComponent implements OnInit {
   progressBar : boolean = true
   private searchTerms = new BehaviorSubject<string>('');
   ngOnInit(): void {  
-    this.postService.getPosts().subscribe((posts)=> {this.dataSource = posts; this.progressBar = false});
+    this.postService.getPosts().subscribe((posts)=> {this.progressBar = false});
+    this.postService.searchPosts('').subscribe((res) => this.dataSource = res)
     this.posts$ = this.searchTerms.pipe(      
       debounceTime(300),      
       //distinctUntilChanged(),      
@@ -32,14 +33,17 @@ export class PostsComponent implements OnInit {
       
   }
   onChanged(term: string) {
-    this.searchTerms.next(term);   
+    this.searchTerms.next(term);
+    this.postService.searchPosts(term).subscribe((res) => this.dataSource = res)   
   }
   addPost () {
     const DialogRef = this.dialog.open(AdditingOfPostComponent);
-    DialogRef.afterClosed().subscribe((res) => this.postService.addPost(res).subscribe(() => {this.searchTerms.next(' ')}))  
+    DialogRef.afterClosed().subscribe((res) => this.postService.addPost(res).subscribe(() => {this.searchTerms.next(' ')
+  this.dataSource.push(res)}))  
   } 
-  delete (el : Post) {    
-    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' ')})    
+  delete (el : Post) {  
+    let index = this.dataSource.indexOf(el)  
+    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); this.dataSource.splice(index, 1)})    
   } 
  
 }

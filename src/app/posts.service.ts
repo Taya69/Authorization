@@ -5,9 +5,9 @@ import { catchError, find, map, tap } from 'rxjs/operators';
 import { Post } from 'src/post';
 import { Comment } from 'src/comment';
 
-const postUrl = 'http://localhost:3000/posts';
-//const postUrl = 'https://jsonplaceholder.typicode.com/posts'
-const commentsUrl = 'http://localhost:3000/comments'
+//const postUrl = 'http://localhost:3000/posts';
+const postUrl = 'https://jsonplaceholder.typicode.com/posts'
+const commentsUrl = 'https://jsonplaceholder.typicode.com/comments'
 @Injectable({
   providedIn: 'root'
 })

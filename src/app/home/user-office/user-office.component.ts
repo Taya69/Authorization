@@ -18,9 +18,8 @@ export class UserOfficeComponent implements OnInit {
    
   ngOnInit(): void {
     const id = Number(localStorage.getItem('id')); 
-    setTimeout(() => this.userService.findUserById(id).subscribe((user) => {this.user1 = user; this.firstName = user.firstName
-    this.lastName = user.lastName}), 2000)   
-    
+    this.userService.findUserById(id).subscribe((user) => {this.user1 = user; this.firstName = user.firstName
+    this.lastName = user.lastName})     
   }
   getSrc (): string {    
     const src = `/assets/users/user${Number(localStorage.getItem('id'))}.jpg`    

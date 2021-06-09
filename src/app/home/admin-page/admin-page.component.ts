@@ -24,18 +24,22 @@ export class AdminPageComponent implements OnInit {
   users: User[] = []; 
   addEdit: boolean = true;  
   cols: number = 3;
+  rowHeight: string = '1:1'
   progressBar: boolean = true;
   constructor(private userService: GetUserService, public dialog: MatDialog) { }
 
   ngOnInit() {    
     this.getUsers(); 
-    if (screen.width > 800) {
-      this.cols = 3
+    if (screen.width > 1000) {
+      this.cols = 3;
+      this.rowHeight = '1:1'
    } else { 
-   if (screen.width <=800 && screen.width > 560) {
-     this.cols = 2
+   if (screen.width <=1000 && screen.width > 800) {
+     this.cols = 2;
+     this.rowHeight = '1:1'
   } else {
     this.cols = 1
+    this.rowHeight = '3:2'
   }
   } 
 }
@@ -43,13 +47,16 @@ getAbleOfButton(user: User) {
   return user.name === localStorage.getItem('key')
 }
   onResize(event : any) {
-    if (event.target.innerWidth > 800) {
-       this.cols = 3
+    if (event.target.innerWidth > 1000) {
+       this.cols = 3;
+       this.rowHeight = '1:1'
     } else { 
-    if (event.target.innerWidth <=800 && event.target.innerWidth > 560) {
-      this.cols = 2
+    if (event.target.innerWidth <=1000 && event.target.innerWidth > 800) {
+      this.cols = 2;
+      this.rowHeight = '1:1'
    } else {
-     this.cols = 1
+     this.cols = 1;
+     this.rowHeight = '3:2'
    }
   }
     }
@@ -67,34 +74,30 @@ getAbleOfButton(user: User) {
   }
   getUsers(): void {
     this.userService.getUsers()
-    .subscribe(users => setTimeout(()=> {this.users = users; this.progressBar = false}, 2000) );
+    .subscribe(users => {this.users = users; this.progressBar = false});
   }
   add () {
     this.addEdit = false;
-    const dialogRef = this.dialog.open(EditDeleteDialog, {      
+    this.dialog.open(EditDeleteDialog, {      
       data: {name: '', edit: this.addEdit, password: '', code: '', id : 100}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
-    });
+    });   
   }  
   confirm (user : User) {
+    if (user.name === localStorage.getItem('key')) {
+      return
+    }
     this.dialog.open(ConfimationDialog, {      
       data: {id : user.id}
     });
   }
   edit (user : User) {
+    if (user.name === localStorage.getItem('key')) {
+      return
+    }
     this.addEdit = true;
-    const dialogRef = this.dialog.open(EditDeleteDialog, {      
+    this.dialog.open(EditDeleteDialog, {      
       data: {name: user.name, edit: this.addEdit, password: user.password, code: user.code, id : user.id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
-    });
+    });   
   }
 
 }
