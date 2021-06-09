@@ -11,3 +11,6 @@ img {
      margin: 2%;
      background-color: rgb(145, 182, 182);
  }
+ input.ng-dirty {
+    
+ }

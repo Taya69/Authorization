@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GetUserService } from 'src/app/get-user.service';
 import { User } from 'src/user';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-office',
   templateUrl: './user-office.component.html',
   styleUrls: ['./user-office.component.css']
 })
-export class UserOfficeComponent implements OnInit {  
+export class UserOfficeComponent implements OnInit, AfterViewInit {  
+  @ViewChild('inputLastName2') refInput: ElementRef | undefined
+  
   firstName: string | undefined = '';
   lastName: string | undefined = '';
   user1: any;
   edit: boolean = true;
   constructor( private userService: GetUserService, private location: Location) { }
+  ngAfterViewInit(): void {
+    console.log(this.refInput)
+  }
    
-  ngOnInit(): void {
+  ngOnInit(): void {    
     const id = Number(localStorage.getItem('id')); 
     this.userService.findUserById(id).subscribe((user) => {this.user1 = user; this.firstName = user.firstName
     this.lastName = user.lastName})     

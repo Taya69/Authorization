@@ -4,18 +4,22 @@
     
         <h2>{{getUsername()}}</h2>  
         <mat-label>First name</mat-label>
-        <input     
+        <input         
+        #inputFirstName2='ngModel'    
         [(ngModel)]='firstName'        
         matInput
         required
         [readonly]='edit'             
         />
         <mat-label>Last name</mat-label>
-        <input    
+        <input        
+        #inputLastName2='ngModel'    
         [(ngModel)]='lastName'        
         matInput
         required 
         [readonly]='edit'           
         />        
-            <button mat-button (click)='edit = !edit; save()'>{{edit ? "Edit" : "Save"}}</button>      
+            <button mat-button (click)='edit = !edit; save()'
+            [disabled]='(!inputLastName2.dirty && !edit && !inputFirstName2.dirty)'
+            >{{edit ? "Edit" : "Save"}}</button>      
 </div>
