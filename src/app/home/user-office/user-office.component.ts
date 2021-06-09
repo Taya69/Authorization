@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./user-office.component.css']
 })
 export class UserOfficeComponent implements OnInit, AfterViewInit {  
-  @ViewChild('inputLastName2') refInput: ElementRef | undefined
+  @ViewChild('userForm') refForm: ElementRef | undefined
   
   firstName: string | undefined = '';
   lastName: string | undefined = '';
@@ -17,7 +17,7 @@ export class UserOfficeComponent implements OnInit, AfterViewInit {
   edit: boolean = true;
   constructor( private userService: GetUserService, private location: Location) { }
   ngAfterViewInit(): void {
-    console.log(this.refInput)
+    console.log(this.refForm)
   }
    
   ngOnInit(): void {    
@@ -36,7 +36,7 @@ export class UserOfficeComponent implements OnInit, AfterViewInit {
     this.location.back();
   }
   save () {
-   if (!this.edit) {return}
+   if (!this.edit) { return}
     this.userService.editUser({
       name: this.user1.name,
       id: this.user1.id,

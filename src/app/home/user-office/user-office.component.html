@@ -1,7 +1,7 @@
 <button mat-button (click)="goBack()" mat-button>go back</button>
 <div class="container">
     <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar"/>   
-    
+    <form #userForm>
         <h2>{{getUsername()}}</h2>  
         <mat-label>First name</mat-label>
         <input         
@@ -21,5 +21,6 @@
         />        
             <button mat-button (click)='edit = !edit; save()'
             [disabled]='(!inputLastName2.dirty && !edit && !inputFirstName2.dirty)'
-            >{{edit ? "Edit" : "Save"}}</button>      
+            >{{edit ? "Edit" : "Save"}}</button>             
+    </form>        
 </div>
