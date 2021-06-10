@@ -11,8 +11,9 @@
 <mat-card *ngFor='let el of dataSource' class="wrap">
 <mat-card-title>{{el.title}}</mat-card-title>
   <mat-card-actions>
-    <a routerLink = "{{el.id}}"><button mat-button>edit</button></a>
+    <button mat-button routerLink = "{{el.id}}">edit</button>
     <button mat-button (click)=delete(el)>delete</button>
+    <button mat-button routerLink = "{{'comments/'+el.id}}">comments</button>
   </mat-card-actions>
 </mat-card>
 </div>

@@ -24,6 +24,7 @@ import { AdditingOfPostComponent, PostsComponent } from './home/posts/posts.comp
 import { PostDetailComponent } from './home/post-detail/post-detail.component';
 import { SearchComponent } from './home/posts/search/search.component';
 import { UserOfficeComponent } from './home/user-office/user-office.component';
+import { CommentsComponent } from './home/comments/comments.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { UserOfficeComponent } from './home/user-office/user-office.component';
     UserOfficeComponent,
     ConfimationDialog,
     BottomSheetOverviewExampleSheet,
-    AdditingOfPostComponent
+    AdditingOfPostComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

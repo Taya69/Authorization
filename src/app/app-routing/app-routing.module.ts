@@ -11,6 +11,7 @@ import { AdminPageComponent } from '../home/admin-page/admin-page.component';
 import { PostsComponent } from '../home/posts/posts.component';
 import { PostDetailComponent } from '../home/post-detail/post-detail.component';
 import { UserOfficeComponent } from '../home/user-office/user-office.component';
+import { CommentsComponent } from '../home/comments/comments.component';
 
 const routes: Routes = [  
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'posts/:id',
         component: PostDetailComponent
+      },
+      {
+        path: 'posts/comments/:id',
+        component: CommentsComponent
       },
       {
         path: 'account',
