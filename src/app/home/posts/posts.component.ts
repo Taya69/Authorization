@@ -52,7 +52,14 @@ export class PostsComponent implements OnInit, AfterViewInit {
   }
   onChanged(term: string) {
     this.searchTerms.next(term);
-    this.postService.searchPosts(term).subscribe((res) => {this.dataSource = res; this.sliceForTemplate()})   
+    this.postService.searchPosts(term).subscribe((res) => {this.dataSource = res; 
+      if (term.trim() === '') {
+        this.sliceForTemplate()
+      } else {
+        this.pageSlice = res 
+      }
+    })
+       
   }
   addPost () {
     const DialogRef = this.dialog.open(AdditingOfPostComponent);
