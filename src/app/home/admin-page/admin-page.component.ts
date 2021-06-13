@@ -1,8 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, Inject, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GetUserService } from 'src/app/get-user.service';
 import { User } from 'src/user';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+
 
 
 export interface DialogData {  
@@ -19,47 +23,53 @@ export interface DialogData {
   templateUrl: './admin-page-card.component.html',
   styleUrls: ['./admin-page.component.css']
 })
-export class AdminPageComponent implements OnInit {  
+export class AdminPageComponent implements OnInit, OnDestroy {  
   
   users: User[] = []; 
   addEdit: boolean = true;  
   cols: number = 3;
   rowHeight: string = '1:1'
   progressBar: boolean = true;
-  constructor(private userService: GetUserService, public dialog: MatDialog) { }
 
-  ngOnInit() {    
-    this.getUsers(); 
-    if (screen.width > 1000) {
-      this.cols = 3;
-      this.rowHeight = '1:1'
-   } else { 
-   if (screen.width <=1000 && screen.width > 800) {
-     this.cols = 2;
-     this.rowHeight = '1:1'
-  } else {
-    this.cols = 1
-    this.rowHeight = '3:2'
+  destroyed = new Subject<void>();
+  currentScreenSize: string = '';
+
+  displayNameMap = new Map([
+    [Breakpoints.XSmall, '1'],
+    [Breakpoints.Small, '1'],
+    [Breakpoints.Medium, '2'],
+    [Breakpoints.Large, '3'],
+    [Breakpoints.XLarge, '3'],
+  ]);
+  
+  constructor(private userService: GetUserService, public dialog: MatDialog, breakpointObserver: BreakpointObserver) { 
+    
+    breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).pipe(takeUntil(this.destroyed)).subscribe(result => {
+      console.log(result)        
+        for (const query of Object.keys(result.breakpoints)) {                          
+          if (result.breakpoints[query]) {                      
+            this.cols = Number(this.displayNameMap.get(query) ?? '3');
+          }
+        }
+    });    
   }
-  } 
+
+  ngOnInit() { 
+    
+    this.getUsers();  
 }
+ngOnDestroy() {  this.destroyed.next();
+  this.destroyed.complete();}
 getAbleOfButton(user: User) {
   return user.name === localStorage.getItem('key')
 }
-  onResize(event : any) {
-    if (event.target.innerWidth > 1000) {
-       this.cols = 3;
-       this.rowHeight = '1:1'
-    } else { 
-    if (event.target.innerWidth <=1000 && event.target.innerWidth > 800) {
-      this.cols = 2;
-      this.rowHeight = '1:1'
-   } else {
-     this.cols = 1;
-     this.rowHeight = '3:2'
-   }
-  }
-    }
+ 
   getAvatar(user: User): string {    
     let url = `/assets/users/user${user.id}.jpg`
     return url

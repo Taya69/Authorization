@@ -1,5 +1,6 @@
-import { ApplicationRef, Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, ApplicationRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { BehaviorSubject, interval, Observable, of, Subject } from 'rxjs';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -13,18 +14,32 @@ import {SearchComponent} from '../posts/search/search.component'
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
-  post: string = ''
+export class PostsComponent implements OnInit, AfterViewInit {
+  @ViewChild('paginator') refPaginator: ElementRef | undefined
+  post: string = '';
+  length: number = 100;
+  pageSize: number = 10;
+  pageIndex = 0;
+  pageSizeOptions: Number[] = [5, 10, 25, 100]
   constructor(private postService: PostsService, public dialog: MatDialog) {    
    }
  // displayedColumns: string[] = ['post', 'edit', 'delete'];
   dataSource : Post[] = []; 
+  pageSlice : Post[] = [];
   posts$!: Observable<Post[]>;
   progressBar : boolean = true
   private searchTerms = new BehaviorSubject<string>('');
+  log () {console.log(this.pageSize)}
   ngOnInit(): void {  
     this.postService.getPosts().subscribe((posts)=> {this.progressBar = false});
-    this.postService.searchPosts('').subscribe((res) => this.dataSource = res)
+    this.postService.searchPosts('').subscribe((res) => {
+     // console.log(1);
+      this.dataSource = res;
+     // 
+     if (this.dataSource.length) {
+      console.log(2);
+      this.sliceForTemplate()}
+    })
     this.posts$ = this.searchTerms.pipe(      
       debounceTime(300),      
       //distinctUntilChanged(),      
@@ -32,20 +47,46 @@ export class PostsComponent implements OnInit {
     ); 
       
   }
+  ngAfterViewInit () {
+    console.log(Object.getPrototypeOf(this.refPaginator))
+  }
   onChanged(term: string) {
     this.searchTerms.next(term);
-    this.postService.searchPosts(term).subscribe((res) => this.dataSource = res)   
+    this.postService.searchPosts(term).subscribe((res) => {this.dataSource = res; this.sliceForTemplate()})   
   }
   addPost () {
     const DialogRef = this.dialog.open(AdditingOfPostComponent);
     DialogRef.afterClosed().subscribe((res) => this.postService.addPost(res).subscribe(() => {this.searchTerms.next(' ')
-  this.dataSource.push(res)}))  
+    this.dataSource.unshift(res); this.sliceForTemplate();
+}
+  ))  
   } 
   delete (el : Post) {  
     let index = this.dataSource.indexOf(el)  
-    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); this.dataSource.splice(index, 1)})    
+    this.postService.deletePost(el.id).subscribe(_=> {this.searchTerms.next(' '); this.dataSource.splice(index, 1); this.sliceForTemplate()})    
   } 
- 
+  onPageChange (event: any) {   
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.sliceForTemplate()  
+  }
+  sliceForTemplate () {
+    let startIndex;
+    if (this.pageIndex === 0) {
+      startIndex = 0
+    } else {
+      startIndex = this.pageIndex + this.pageSize;
+    }
+    
+    let endIndex = startIndex + this.pageSize;
+    if (endIndex > this.dataSource.length) {
+      endIndex = this.dataSource.length
+    }
+    console.log(this.dataSource, startIndex, endIndex)
+
+    this.pageSlice = this.dataSource.slice(startIndex, endIndex)
+  }
+  
 }
 
 @Component({

@@ -8,7 +8,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
 </form>
 <div>
-<mat-card *ngFor='let el of dataSource' class="wrap">
+<mat-card *ngFor='let el of pageSlice' class="wrap">
 <mat-card-title>{{el.title}}</mat-card-title>
   <mat-card-actions>
     <button mat-button routerLink = "{{el.id}}">edit</button>
@@ -17,6 +17,12 @@
   </mat-card-actions>
 </mat-card>
 </div>
+<mat-paginator #paginator [length]="dataSource.length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (page)='onPageChange($event)'>
+</mat-paginator>
+<button (click)='log()'>length</button>
 <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
    
     <ng-container matColumnDef="post">

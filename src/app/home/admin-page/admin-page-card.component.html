@@ -1,7 +1,7 @@
 <button mat-button (click)='add()'>Add user</button>
 <h2>Users</h2>
 <mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
-<mat-grid-list [cols]="cols" rowHeight="1:1" (window:resize)="onResize($event)">
+<mat-grid-list [cols]="cols" rowHeight="1:1">
   <mat-grid-tile *ngFor="let user of users" >
     <mat-card class="example-card" >
       <mat-card-header>
