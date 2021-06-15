@@ -20,3 +20,9 @@ table {
  .wrap {
   word-wrap: break-word;
  }
+ h2 {
+  text-align: center;
+}
+.tooltip {
+  text-align: center;
+}

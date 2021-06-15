@@ -3,11 +3,11 @@
 <mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
 <mat-grid-list [cols]="cols" rowHeight="1:1">
   <mat-grid-tile *ngFor="let user of users" >
-    <mat-card class="example-card" >
+    <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{user.name}}</mat-card-title>
-        <mat-card-subtitle>{{user.id}}</mat-card-subtitle>
+        
       </mat-card-header>
       <img mat-card-image id="test"
       [src]="getAvatar(user)" 

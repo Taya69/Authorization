@@ -17,7 +17,7 @@ export class UserOfficeComponent implements OnInit, AfterViewInit {
   edit: boolean = true;
   constructor( private userService: GetUserService, private location: Location) { }
   ngAfterViewInit(): void {
-    console.log(this.refForm)
+    
   }
    
   ngOnInit(): void {    

@@ -89,9 +89,18 @@ export class PostsComponent implements OnInit, AfterViewInit {
     if (endIndex > this.dataSource.length) {
       endIndex = this.dataSource.length
     }
-    console.log(this.dataSource, startIndex, endIndex)
-
     this.pageSlice = this.dataSource.slice(startIndex, endIndex)
+  }
+  confirm (post : Post) {
+
+    const DialogRef = this.dialog.open(ConfimationDialogPost, {      
+      data: {id : post.id}
+    });
+    DialogRef.afterClosed().subscribe((el) => {
+      if (el === 'delete') {
+        this.delete(post) 
+      }
+      })
   }
   
 }
@@ -115,4 +124,23 @@ export class AdditingOfPostComponent implements OnInit {
     const post1 = { "id": id, "title": this.post, "author": author};      
     this.dialogRef.close(post1)  
   }  
+}
+
+@Component({
+  selector: 'confimation-dialog',
+  templateUrl: 'confirmation-dialog.html',
+  styleUrls: ['./posts.component.css']
+})
+export class ConfimationDialogPost {
+  
+constructor (@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialogRef2: MatDialogRef<ConfimationDialogPost>,
+private postService: PostsService) {}
+closeDialog () {
+  this.dialogRef2.close("notDelete")
+}
+
+delete(): void {  
+  this.postService.deletePost(this.data.id);
+  this.dialogRef2.close("delete")
+}
 }

@@ -1,17 +1,13 @@
 <button (click)="goBack()" mat-button>go back</button>
 <div *ngIf="post" class="container">
     
-      <h2>{{post.title | uppercase}} Details</h2>
-      <div><span>id: </span>{{post.id}}</div>    
+      <h2>{{getTitle() | uppercase}} Details</h2>        
       <form class="example-form">
         <mat-form-field class="example-full-width">
           <mat-label>Post title: </mat-label>
-          <input matInput placeholder="name" [(ngModel)]="post.title" id="post-title" name="first">
+          <input matInput placeholder="name" [(ngModel)]="title" id="post-title" name="first">
         </mat-form-field>   
       </form>
       <button mat-button (click)="save()">save</button>
     </div>
-    <h3>Comments</h3>
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor='let el of comments'>{{el.body}}</mat-list-item>      
-    </mat-list>
+   

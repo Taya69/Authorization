@@ -9,7 +9,7 @@ import {takeUntil} from 'rxjs/operators';
 
 
 
-export interface DialogData {  
+export interface DialogData {   
   name: string;
   edit: boolean;
   password: string;
@@ -78,10 +78,7 @@ getAbleOfButton(user: User) {
     let img = document.getElementById('test')
     //try {img.src = this.getAvatar}
     
-  }
-  onImageNotLoad () {
-
-  }
+  }  
   getUsers(): void {
     this.userService.getUsers()
     .subscribe(users => {this.users = users; this.progressBar = false});

@@ -1,15 +1,16 @@
-<p>
-    <mat-toolbar>
+<mat-toolbar>
       <nav>
         <button mat-button routerLink="/home">Main</button>
         <button mat-button routerLink="/home/posts">Posts</button> 
-        <button mat-button routerLink="/home/admin">Admin</button>                          
-      </nav>        
+        <button mat-button routerLink="/home/admin" *ngIf='admin()'>Admin</button>                          
+      </nav> 
+      <div class="spacer"></div>       
         <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="/home/account">{{getUsername()}}</button> 
           <button mat-menu-item routerLink="/" class='logout' (click)='clearUser()'>Logout</button>                   
         </mat-menu>      
         <img [src]='getSrc()' alt="avatar" onerror="this.src='/assets/users/undefined.jpg'" [matMenuTriggerFor]="menu"/>          
-    </mat-toolbar>
-  </p>
-<router-outlet></router-outlet>
+</mat-toolbar>
+  
+<div class="space"></div>
+ <router-outlet></router-outlet>

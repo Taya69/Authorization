@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from 'lowdb/lib';
+import { User } from 'src/user';
+import { GetUserService } from '../get-user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,11 @@ import { LocalStorage } from 'lowdb/lib';
 })
 export class HomeComponent implements OnInit {
   
-  constructor() { }
-
+  constructor(private userServeice: GetUserService) { }
+  user: any;
   ngOnInit(): void {
+    const id = Number(localStorage.getItem('id'))
+   this.userServeice.findUserById(id).subscribe((user)=> this.user = user)
   }
   clearUser() {
     localStorage.removeItem('key')
@@ -23,4 +27,10 @@ export class HomeComponent implements OnInit {
   getUsername () {
     return localStorage.getItem('key')
   }
+  admin (): boolean {
+    if (this.user.role === 'admin') {return true} 
+    else { return false}
+  
+  }
+ 
 }
