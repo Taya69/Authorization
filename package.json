@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
+    "angular-material": "^1.2.2",
     "lowdb": "^2.1.0",
     "ng-fallback-src": "^1.0.2",
     "rxjs": "~6.6.0",
