@@ -34,30 +34,30 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   destroyed = new Subject<void>();
   currentScreenSize: string = '';
 
-  displayNameMap = new Map([
-    [Breakpoints.XSmall, '1'],
-    [Breakpoints.Small, '1'],
-    [Breakpoints.Medium, '2'],
-    [Breakpoints.Large, '3'],
-    [Breakpoints.XLarge, '3'],
-  ]);
+  // displayNameMap = new Map([
+  //   [Breakpoints.XSmall, '1'],
+  //   [Breakpoints.Small, '1'],
+  //   [Breakpoints.Medium, '2'],
+  //   [Breakpoints.Large, '3'],
+  //   [Breakpoints.XLarge, '3'],
+  // ]);
   
   constructor(private userService: GetUserService, public dialog: MatDialog, breakpointObserver: BreakpointObserver) { 
     
-    breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).pipe(takeUntil(this.destroyed)).subscribe(result => {
-      console.log(result)        
-        for (const query of Object.keys(result.breakpoints)) {                          
-          if (result.breakpoints[query]) {                      
-            this.cols = Number(this.displayNameMap.get(query) ?? '3');
-          }
-        }
-    });    
+    // breakpointObserver.observe([
+    //   Breakpoints.XSmall,
+    //   Breakpoints.Small,
+    //   Breakpoints.Medium,
+    //   Breakpoints.Large,
+    //   Breakpoints.XLarge,
+    // ]).pipe(takeUntil(this.destroyed)).subscribe(result => {
+    //   console.log(result)        
+    //     for (const query of Object.keys(result.breakpoints)) {                          
+    //       if (result.breakpoints[query]) {                      
+    //         this.cols = Number(this.displayNameMap.get(query) ?? '3');
+    //       }
+    //     }
+    // });    
   }
 
   ngOnInit() { 
@@ -71,7 +71,7 @@ getAbleOfButton(user: User) {
 }
  
   getAvatar(user: User): string {    
-    let url = `/assets/users/user${user.id}.jpg`
+    let url = `/assets/users/${user.img}.jpg`
     return url
   }
   onImageLoad () {
@@ -184,6 +184,7 @@ export class ConfimationDialog {
   
 constructor (@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialogRef2: MatDialogRef<ConfimationDialog>,
 private userService: GetUserService) {}
+
 closeDialog () {
   this.dialogRef2.close()
 }

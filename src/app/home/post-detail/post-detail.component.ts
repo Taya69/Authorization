@@ -4,6 +4,7 @@ import { PostsService } from 'src/app/posts.service';
 import { Post } from 'src/post';
 import { Location } from '@angular/common';
 import { Comment} from 'src/comment'
+import { LocalStorage } from 'lowdb/lib';
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
@@ -13,6 +14,7 @@ export class PostDetailComponent implements OnInit {
   @Input() post?: Post;
   @Input() comments?: Comment[];
   title : string = ''
+  progressBar : boolean = true
   constructor(
     private route: ActivatedRoute,
     private postService: PostsService,
@@ -25,7 +27,7 @@ export class PostDetailComponent implements OnInit {
   getPostAndComment(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.postService.getPost(id)
-      .subscribe(post => {this.post = post; this.title = post.title});
+      .subscribe(post => {this.progressBar = false; this.post = post; this.title = post.title});
     this.postService.getComment(id).subscribe((data) => this.comments = data)
   }
   goBack(): void {
@@ -35,7 +37,8 @@ export class PostDetailComponent implements OnInit {
     if (this.post) {
       this.post.title = this.title
       this.postService.updatePost(this.post)
-        .subscribe(() => this.goBack());
+        .subscribe(() => {localStorage.setItem('idPost', String(this.post?.id)); localStorage.setItem('namePost', String(this.post?.title)); 
+        this.goBack()});
     }
   }
   getTitle () {

@@ -31,13 +31,25 @@ export class PostsComponent implements OnInit, AfterViewInit {
   private searchTerms = new BehaviorSubject<string>('');
   log () {console.log(this.pageSize)}
   ngOnInit(): void {  
-    this.postService.getPosts().subscribe((posts)=> {this.progressBar = false});
+    this.postService.getPosts().subscribe((posts)=> {});
     this.postService.searchPosts('').subscribe((res) => {
-     // console.log(1);
+      this.progressBar = false
+    
       this.dataSource = res;
-     // 
+      
+     if (localStorage.getItem('idPost') !== null) {
+      console.log(localStorage.getItem('idPost'))
+     
+        const post = this.dataSource.find((el) => el.id === Number(localStorage.getItem('idPost')))!
+        const index = this.dataSource.indexOf(post)
+        console.log(index)
+        this.dataSource[index].title = String(localStorage.getItem('namePost'));
+        localStorage.removeItem('idPost');
+        localStorage.removeItem('namePost')
+      
+     }
      if (this.dataSource.length) {
-      console.log(2);
+      
       this.sliceForTemplate()}
     })
     this.posts$ = this.searchTerms.pipe(      

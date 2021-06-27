@@ -1,5 +1,6 @@
 <button (click)="goBack()" mat-button>go back</button>
     <h3>Comments</h3>
+    <mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
     <mat-list role="list">
       <mat-list-item role="listitem" *ngFor='let el of comments'>{{el.body}}</mat-list-item>      
     </mat-list>

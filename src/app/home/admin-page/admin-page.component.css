@@ -58,6 +58,14 @@
     margin-left: 80%;
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-column-gap: 5%;
+    grid-row-gap: 15px;
+    justify-content: center; 
+  }
+
  
   
     

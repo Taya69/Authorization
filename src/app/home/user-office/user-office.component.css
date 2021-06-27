@@ -15,3 +15,7 @@ img {
  .spacer {
      min-height: 200px;
  }
+
+ .dn {
+     display: none;
+ }

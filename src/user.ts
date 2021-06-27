@@ -5,5 +5,6 @@ export interface User {
     code: string;
     firstName? : string,
     lastName?: string,
-    role?: string     
+    role?: string,
+    img? : string     
   }

@@ -1,4 +1,5 @@
 <button (click)="goBack()" mat-button>go back</button>
+<mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
 <div *ngIf="post" class="container">
     
       <h2>{{getTitle() | uppercase}} Details</h2>        

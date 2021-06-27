@@ -15,6 +15,7 @@ export class CommentsComponent implements OnInit {
     private postService: PostsService,
     private location: Location
   ) { }
+  progressBar: boolean = true
  post: any;
  comments :Comment[] = []
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class CommentsComponent implements OnInit {
   }
   getPostAndComment(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));   
-    this.postService.getComment(id).subscribe((data) => this.comments = data)
+    this.postService.getComment(id).subscribe((data) => {this.progressBar = false; this.comments = data})
   }
   goBack(): void {
     this.location.back();

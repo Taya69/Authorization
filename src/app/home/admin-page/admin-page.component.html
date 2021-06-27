@@ -1,9 +1,9 @@
 <button mat-button (click)='add()'>Add user</button>
 <h2>Users</h2>
-<div class="container"> 
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-<mat-list role="list" class="heroes">
-  <div *ngFor="let user of users" class="justify">
+<div class="container">   
+  <mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
+  <mat-list role="list" class="heroes">
+    <div *ngFor="let user of users" class="justify">
   <mat-list-item role="listitem" >     
     <div class="content">   
      <span class="badge">{{user.id}}</span>  

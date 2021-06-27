@@ -1,8 +1,8 @@
 <button mat-button (click)='add()'>Add user</button>
 <h2>Users</h2>
 <mat-progress-bar mode="indeterminate" *ngIf='progressBar'></mat-progress-bar>
-<mat-grid-list [cols]="cols" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let user of users" >
+<div class="grid">
+  <div class="grid-element" *ngFor="let user of users" >
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
@@ -23,8 +23,8 @@
       <button mat-button [disabled]='getAbleOfButton(user)'><mat-icon (click)="confirm(user)">delete</mat-icon></button>
     </mat-card-actions>    
 </mat-card>
-</mat-grid-tile>
-</mat-grid-list>
+</div>
+</div>
 
 
 

@@ -1,12 +1,17 @@
 
-<div class="container">
-    
+<div class="container">    
     <button mat-button (click)="goBack()" mat-button>go back</button>
-    <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar"/>   
-    <form #userForm>
+    <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar2"/>
+    <input type="file" class="dn" #inputForFile (change)='onFileUpload($event)'/>  
+    <img [src]='imagePreview' *ngIf='imagePreview' id='imageUpload'/> 
+    <!-- <button mat-button (click)='triggerOfUpload()'>Upload image</button>
+    <button (click)="OnUploadFile()">Upload</button>    -->
+    <form #userForm name="loginForm" [formGroup]="loginForm">
         <h2>{{getUsername()}}</h2>  
+        <mat-form-field class="full-width" appearance="outline">        
         <mat-label>First name</mat-label>
-        <input         
+        <input
+        [ngModelOptions]="{standalone: true}"       
         #inputFirstName2='ngModel'    
         [(ngModel)]='firstName'        
         matInput
@@ -14,17 +19,23 @@
         [readonly]='edit' 
         name="first"            
         />
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline">
         <mat-label>Last name</mat-label>
-        <input        
+        <input    
+        [ngModelOptions]="{standalone: true}"    
         #inputLastName2='ngModel'    
         [(ngModel)]='lastName'        
         matInput
         required 
         [readonly]='edit'
         name="second"           
-        />        
+        />  
+        </mat-form-field>      
             <button mat-button (click)='edit = !edit; save()'
             [disabled]='(!inputLastName2.dirty && !edit && !inputFirstName2.dirty)'
             >{{edit ? "Edit" : "Save"}}</button>             
-    </form>        
+    </form>  
+   <!-- <button (click)='load()'>load</button> -->
+   
 </div>
