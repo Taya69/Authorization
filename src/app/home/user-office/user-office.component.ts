@@ -4,6 +4,7 @@ import { User } from 'src/user';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { UserImageService } from 'src/app/user-image.service';
 
 @Component({
   selector: 'app-user-office',
@@ -22,13 +23,14 @@ export class UserOfficeComponent implements OnInit {
   imagePreview: any;
   nameOfUploadFile: string = ''
   constructor( private userService: GetUserService, private location: Location, private fb: FormBuilder,
-   private http: HttpClient ) { }
+   private http: HttpClient, private userImageService:UserImageService ) { }
  
   loginForm: FormGroup = this.fb.group({})
   ngOnInit(): void {    
     const id = Number(localStorage.getItem('id')); 
     this.userService.findUserById(id).subscribe((user) => {this.user1 = user; this.firstName = user.firstName
-    this.lastName = user.lastName})     
+    this.lastName = user.lastName})  
+    this.imagePreview = this.userImageService.getParams()  
   }
   getSrc (): string {    
     const src = `/assets/users/user${Number(localStorage.getItem('id'))}.jpg`    
@@ -54,6 +56,9 @@ export class UserOfficeComponent implements OnInit {
   triggerOfUpload() {
     this.inputForFileRef.nativeElement.click()
   } 
+  submit () {
+    this.userImageService.setParams(this.imagePreview)
+  }
   onFileUpload (event : any) {
     const file = event.target.files[0];
     this.file = file;

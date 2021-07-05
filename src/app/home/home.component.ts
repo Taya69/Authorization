@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from 'lowdb/lib';
 import { User } from 'src/user';
 import { GetUserService } from '../get-user.service';
+import { UserImageService } from '../user-image.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { GetUserService } from '../get-user.service';
 })
 export class HomeComponent implements OnInit {
   
-  constructor(private userServeice: GetUserService) { }
+  constructor(private userServeice: GetUserService, private userImageService:UserImageService) { }
   user: any;
   ngOnInit(): void {
     const id = Number(localStorage.getItem('id'))
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('id')
   }
   getSrc (): string {    
-    const src = `/assets/users/user${Number(localStorage.getItem('id'))}.jpg`    
+    const src = this.userImageService.getParams() 
     return src
   }
   getUsername () {

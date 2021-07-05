@@ -12,6 +12,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
+
 import { AppComponent } from './app.component';
 import { AuthorizationComponent, DialogDataExampleDialog } from './authorization/authorization.component';
 import { HomeComponent } from './home/home.component';
@@ -25,6 +26,7 @@ import { PostDetailComponent } from './home/post-detail/post-detail.component';
 import { SearchComponent } from './home/posts/search/search.component';
 import { UserOfficeComponent } from './home/user-office/user-office.component';
 import { CommentsComponent } from './home/comments/comments.component';
+import { UserImageService } from './user-image.service';
 
 
 @NgModule({
@@ -62,7 +64,7 @@ import { CommentsComponent } from './home/comments/comments.component';
     MatNativeDateModule,    
     HttpClientModule,    
   ],
-  providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthGuard],
+  providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthGuard, UserImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

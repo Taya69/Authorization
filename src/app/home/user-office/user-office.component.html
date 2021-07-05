@@ -1,11 +1,12 @@
 
 <div class="container">    
     <button mat-button (click)="goBack()" mat-button>go back</button>
-    <img [src]='getSrc()' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar2"/>
-    <input type="file" class="dn" #inputForFile (change)='onFileUpload($event)'/>  
-    <img [src]='imagePreview' *ngIf='imagePreview' id='imageUpload'/> 
-    <!-- <button mat-button (click)='triggerOfUpload()'>Upload image</button>
-    <button (click)="OnUploadFile()">Upload</button>    -->
+    <img [src]='imagePreview' onerror="this.src='/assets/users/undefined.jpg'" alt="avatar2"
+    *ngIf='imagePreview' id='imageUpload'/>
+    <input type="file" class="dn" #inputForFile (change)='onFileUpload($event)'/>     
+    <button mat-button (click)='triggerOfUpload()'>Upload image</button>
+    <button mat-button (click)='submit()'>Submit</button>
+      
     <form #userForm name="loginForm" [formGroup]="loginForm">
         <h2>{{getUsername()}}</h2>  
         <mat-form-field class="full-width" appearance="outline">        
